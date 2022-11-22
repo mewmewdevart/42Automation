@@ -35,6 +35,7 @@ else
 fi
 echo "Done."
 
+# adjusts in my archives
 mv libraries/libft libraries/libs
 mv libraries/libs/libft/ libraries/
 rm -rf libraries/libs
