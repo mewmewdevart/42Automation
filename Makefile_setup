@@ -1,0 +1,34 @@
+LINKER			= gcc
+COMPILER		= $(LINKER) -c
+
+REMOVE			= rm
+REMOVE_FORCE	= $(REMOVE)-rf
+MAKE_DIR		= mkdir -p
+DEBUG			= gdb -q -tui
+MEMCHECK		= valgrind
+
+FLAG_C			= -Wall -Wextra -Werror
+FLAG_LEAK		= --leak-check=full --show-leak-kinds=all --track-origins=yes
+FLAG_LEAK		+= -s
+
+PATH_INCLUDES	= includes
+PATH_SOURCES	= sources
+PATH_OBJECTS	= objects
+PATH_LIBRARIES	= libraries
+PATH_TESTS		= tests
+PATH_LIBFT		= $(PATH_LIBRARIES)/libft
+
+LIBFT			= $(PATH_LIBFT)/libft.a
+INCLUDES		= -I$(PATH_INCLUDES) -I$(PATH_LIBFT)
+
+run: all
+	./$(NAME)
+
+debug: all
+	$(DEBUG) ./$(NAME)
+
+leak:
+	$(MEMCHECK) $(FLAG_LEAK) ./$(NAME)
+
+test:
+	$(MAKE) -C $(PATH_TESTS) all
